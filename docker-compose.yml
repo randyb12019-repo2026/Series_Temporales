@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  series_temporales:
+    build: .
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/app/notebooks
+    stdin_open: true
+    tty: true
