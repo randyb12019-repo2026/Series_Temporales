@@ -57,7 +57,7 @@ docker compose run --rm series_temporales jupyter notebook --ip=0.0.0.0 --port=8
 
 ## Autor
 
-Randy Bonucci Martin — Proyecto educativo, Bootcamp Data & IA
+Randy Bonucci — Proyecto educativo, Bootcamp Data & IA
 
 ## Licencia
 
