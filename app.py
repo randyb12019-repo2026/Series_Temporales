@@ -15,14 +15,21 @@ st.set_page_config(page_title="Series Temporales - NVDA", layout="wide")
 st.title("Series Temporales - Análisis de NVIDIA (NVDA)")
 st.markdown("Proyecto educativo de análisis de series temporales con Python.")
 
-@st.cache_data
+@st.cache_data(ttl=3600, show_spinner=False)
 def load_data():
-    df = yf.download("NVDA", start="2020-01-01", end="2026-06-04")
-    df.columns = df.columns.get_level_values(0)
-    df["Precio_Medio"] = (df["High"] + df["Low"]) / 2
-    return df
+    try:
+        df = yf.download("NVDA", start="2020-01-01", end="2026-06-04", progress=False)
+        if df.empty:
+            st.error("No se pudieron obtener datos de yfinance. Intenta más tarde.")
+            st.stop()
+        df.columns = df.columns.get_level_values(0)
+        df["Precio_Medio"] = (df["High"] + df["Low"]) / 2
+        return df
+    except Exception as e:
+        st.error(f"Error al descargar datos: {e}")
+        st.stop()
 
-with st.spinner("Descargando datos de NVDA..."):
+with st.spinner("Descargando datos de NVDA desde Yahoo Finance..."):
     nvidia = load_data()
 
 st.success("Datos cargados correctamente")
