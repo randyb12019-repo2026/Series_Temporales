@@ -6,3 +6,4 @@ yfinance
 pmdarima
 jupyter
 scikit-learn
+streamlit

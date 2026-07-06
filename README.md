@@ -22,6 +22,7 @@ Proyecto educativo de analisis de series temporales con Python, usando datos fin
 
 ```
 Series_Temporales/
+├── app.py                            # Streamlit app para visualizacion interactiva
 ├── notebooks/
 │   └── st.ipynb                      # Notebook principal con analisis temporal
 ├── Dockerfile                        # Imagen Python 3.13-slim con Jupyter
@@ -54,6 +55,32 @@ Esto inicia un contenedor con el notebook listo para usar.
 ```bash
 docker compose run --rm series_temporales jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root
 ```
+
+## Streamlit App
+
+Se incluye una aplicacion interactiva desarrollada con **Streamlit** para visualizar los analisis de series temporales.
+
+### Ejecutar localmente
+
+```bash
+streamlit run app.py
+```
+
+### Ejecutar con Docker
+
+```bash
+docker build -t series_temporales-streamlit .
+docker run -p 8501:8501 series_temporales-streamlit streamlit run app.py --server.port=8501 --server.address=0.0.0.0
+```
+
+### Funcionalidades
+
+- Vista general de los datos de NVDA
+- Descomposicion estacional (tendencia, estacionalidad, residuo)
+- Medias moviles configurables (7, 30, 60, 90 dias)
+- Test de estacionariedad ADF
+- Modelo ARIMA automatico con pmdarima
+- Pronostico y evaluacion con metricas MAE y RMSE
 
 ## Autor
 
